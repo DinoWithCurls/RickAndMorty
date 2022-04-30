@@ -1,21 +1,24 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 
-const CharacterCard = () => {
+const CharacterCard = ({name, species, gender, imageUrl}: any) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.imageContainer}>
-        <Text>Character Image</Text>
+        <Image
+          source={{uri: imageUrl}}
+          style={{ resizeMode:'stretch', height: '100%', width: '100%', borderRadius: 25}}
+        />
       </View>
       <View style={styles.textContainer}>
-        <Text>Character Name</Text>
-        <Text>Character Species</Text>
-        <Text>Character Gender</Text>
-        <Text>Character Origin</Text>
+        <Text>Name : {name}</Text>
+        <Text>Species : {species}</Text>
+        <Text>Gender: {gender}</Text>
+        <Text>Origin</Text>
         <View>
           <Text>Current Location</Text>
-          <Text>Character Current Location Name</Text>
-          <Text>Character Current Location Dimension</Text>
+          <Text>Current Location Name</Text>
+          <Text>Current Location Dimension</Text>
           <Text>No of residents</Text>
         </View>
         <Text>Name of Chapters they were in</Text>
@@ -34,18 +37,14 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: 'white',
     borderRadius: 25,
+    backgroundColor:'lightgreen',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
   },
   imageContainer: {
-    width: '95%',
-    height: '35%',
-    borderWidth: 2,
-    borderColor: 'white',
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: '50%',
+    height: '30%',
     position: 'absolute',
     top: 5,
   },
@@ -55,9 +54,11 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     width: '95%',
     height: '60%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingTop: 20,
+    paddingLeft: 5,
+    alignItems: 'flex-start',
     position: 'absolute',
     bottom: 5,
+    backgroundColor: 'white',
   },
 });
