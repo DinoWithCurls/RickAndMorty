@@ -31,7 +31,6 @@ const HomeScreen = ({navigation, route}: RootStackParamList<'Home'>) => {
   };
   useEffect(() => {
     fetchDataFromAPI();
-    console.log(characterData);
   }, [characterData]);
 
   const _renderItem = ({item}: any) => (
