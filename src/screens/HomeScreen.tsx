@@ -13,6 +13,8 @@ import {RootStackParamList} from '../navigation/RootStackParamList';
 
 import CharacterCard from '../components/characterCard';
 
+import ScreenStyle from '../styles/screens';
+
 const baseUrl = 'https://www.rickandmortyapi.com/api/character';
 //All the character details will be shown here.
 const HomeScreen = ({navigation, route}: RootStackParamList<'Home'>) => {
@@ -42,22 +44,11 @@ const HomeScreen = ({navigation, route}: RootStackParamList<'Home'>) => {
   );
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-      }}>
+    <SafeAreaView style={ScreenStyle.container}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Text>Go Back</Text>
       </TouchableOpacity>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View style={ScreenStyle.carousel}>
         <Carousel
           ref={isCarousel}
           layout="default"
@@ -65,7 +56,7 @@ const HomeScreen = ({navigation, route}: RootStackParamList<'Home'>) => {
           sliderWidth={screenWidth}
           itemWidth={Math.round(screenWidth * 0.8)}
           renderItem={_renderItem}
-          onSnapToItem={index => setActiveIndex(index)}
+          onSnapToItem={({index}: any) => setActiveIndex(index)}
         />
       </View>
     </SafeAreaView>
