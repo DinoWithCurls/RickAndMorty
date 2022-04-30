@@ -31,7 +31,6 @@ export default CharacterCard;
 
 const styles = StyleSheet.create({
   cardContainer: {
-    height: '100%',
     width: '100%',
     flex: 1,
     borderWidth: 3,
