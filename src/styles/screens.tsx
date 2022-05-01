@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-
+//All the CSS required for the screens are present here.
 const ScreenStyle = StyleSheet.create({
   container: {
     flex: 1,

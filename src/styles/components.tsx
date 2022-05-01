@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-
+//All the CSS for the components are inside here
 const ComponentStyle = StyleSheet.create({
   cardContainer: {
     width: '100%',
@@ -25,9 +25,7 @@ const ComponentStyle = StyleSheet.create({
     borderRadius: 25,
   },
   textContainer: {
-    borderWidth: 2,
-    borderRadius: 25,
-    borderColor: 'white',
+    flexDirection: 'column',
     width: '95%',
     height: '70%',
     paddingTop: 20,
@@ -36,6 +34,26 @@ const ComponentStyle = StyleSheet.create({
     position: 'absolute',
     bottom: 5,
   },
+  headerText: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    fontFamily: 'Copperplate-Bold',
+    fontSize: 30,
+  },
+  contentText: {
+    fontFamily: 'Copperplate-Bold',
+    fontSize: 18,
+    flexWrap: 'wrap',
+  },
+  subHeaderContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  subHeaderLine: {flex: 1, height: 1, backgroundColor: 'black'},
+  subHeaderText: {
+    fontFamily: 'Copperplate-Bold',
+    fontSize: 22,
+  }
 });
 
 export default ComponentStyle;
