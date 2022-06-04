@@ -13,13 +13,18 @@ import {RootStackParamList} from '../navigation/RootStackParamList';
 
 import CharacterCard from '../components/characterCard';
 
+import ScreenStyle from '../styles/screens';
+
 const baseUrl = 'https://www.rickandmortyapi.com/api/character';
 //All the character details will be shown here.
 const HomeScreen = ({navigation, route}: RootStackParamList<'Home'>) => {
   const isCarousel = useRef(null);
+  //Fetch and store data from the API into an array
   const [characterData, setCharacterData] = useState([]);
+  //Get the index of the card being currently displayed on screen
   const [activeIndex, setActiveIndex] = useState(0);
   const screenWidth = Dimensions.get('window').width + 80;
+  //Function for fetching data from API
   const fetchDataFromAPI = () => {
     fetch(baseUrl)
       .then(res => res.json())
@@ -29,7 +34,6 @@ const HomeScreen = ({navigation, route}: RootStackParamList<'Home'>) => {
   };
   useEffect(() => {
     fetchDataFromAPI();
-    console.log(characterData);
   }, [characterData]);
 
   const _renderItem = ({item}: any) => (
@@ -38,26 +42,17 @@ const HomeScreen = ({navigation, route}: RootStackParamList<'Home'>) => {
       species={item.species}
       gender={item.gender}
       imageUrl={item.image}
+      origin={item.origin}
+      location={item.location}
     />
   );
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-      }}>
+    <SafeAreaView style={ScreenStyle.container}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Text>Go Back</Text>
       </TouchableOpacity>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View style={ScreenStyle.carousel}>
         <Carousel
           ref={isCarousel}
           layout="default"
@@ -65,7 +60,7 @@ const HomeScreen = ({navigation, route}: RootStackParamList<'Home'>) => {
           sliderWidth={screenWidth}
           itemWidth={Math.round(screenWidth * 0.8)}
           renderItem={_renderItem}
-          onSnapToItem={index => setActiveIndex(index)}
+          onSnapToItem={({index}: any) => setActiveIndex(index)}
         />
       </View>
     </SafeAreaView>

@@ -1,63 +1,54 @@
-import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-
-const CharacterCard = ({name, species, gender, imageUrl}: any) => {
+import React, {useState, useEffect} from 'react';
+import {View, Text, Image} from 'react-native';
+import ComponentStyle from '../styles/components';
+import SubHeader from './subHeader';
+const CharacterCard = ({
+  name,
+  species,
+  gender,
+  imageUrl,
+  origin,
+  location,
+}: any) => {
+  const [dimension, getDimension] = useState('');
+  const [noOfResidents, getNoOfResidents] = useState(0);
+  //Get details from the location endpoint, such as the dimension, and the no of residents in that dimension
+  //Get the episodes value from the HomeScreen, and show a episodes dropdown. If you learn how to do it, in the future.
+  const getLocationDetails = loc => {
+    fetch(loc.url)
+      .then(res => res.json())
+      .then(res => {
+        getDimension(res.dimension);
+        getNoOfResidents(res.residents.length);
+      });
+  };
+  //Get the names of the episodes the character has featured in
+  //const getEpisodeName = epi => { let result;fetch(epi).then(res => res.json()).then(res => { result = res.name; });console.log(result);};
+  //episode.map(chapter => getEpisodeName(chapter));
+  //Make the function calls inside useEffect hook, to make sure data is available before rendering.
+  useEffect(() => {
+    getLocationDetails(location);
+  });
   return (
-    <View style={styles.cardContainer}>
-      <View style={styles.imageContainer}>
-        <Image
-          source={{uri: imageUrl}}
-          style={{ resizeMode:'stretch', height: '100%', width: '100%', borderRadius: 25}}
-        />
+    <View style={ComponentStyle.cardContainer}>
+      <View style={ComponentStyle.imageContainer}>
+        <Image source={{uri: imageUrl}} style={ComponentStyle.imageStyle} />
       </View>
-      <View style={styles.textContainer}>
-        <Text>Name : {name}</Text>
-        <Text>Species : {species}</Text>
-        <Text>Gender: {gender}</Text>
-        <Text>Origin</Text>
-        <View>
-          <Text>Current Location</Text>
-          <Text>Current Location Name</Text>
-          <Text>Current Location Dimension</Text>
-          <Text>No of residents</Text>
-        </View>
-        <Text>Name of Chapters they were in</Text>
+      <View style={ComponentStyle.textContainer}>
+        <Text style={ComponentStyle.headerText}>{name}</Text>
+        <Text style={ComponentStyle.contentText}>Species: {species}</Text>
+        <Text style={ComponentStyle.contentText}>Gender: {gender}</Text>
+        <SubHeader title={'Origin'} />
+        <Text style={ComponentStyle.contentText}>{origin.name}</Text>
+        <SubHeader title={'Current Location'} />
+        <Text style={ComponentStyle.contentText}>Name: {location.name}</Text>
+        <Text style={ComponentStyle.contentText}>Dimension: {dimension}</Text>
+        <Text style={ComponentStyle.contentText}>
+          Residents: {noOfResidents}
+        </Text>
       </View>
     </View>
   );
 };
 
 export default CharacterCard;
-
-const styles = StyleSheet.create({
-  cardContainer: {
-    width: '100%',
-    flex: 1,
-    borderWidth: 3,
-    borderColor: 'white',
-    borderRadius: 25,
-    backgroundColor:'lightgreen',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  imageContainer: {
-    width: '50%',
-    height: '30%',
-    position: 'absolute',
-    top: 5,
-  },
-  textContainer: {
-    borderWidth: 2,
-    borderRadius: 25,
-    borderColor: 'white',
-    width: '95%',
-    height: '60%',
-    paddingTop: 20,
-    paddingLeft: 5,
-    alignItems: 'flex-start',
-    position: 'absolute',
-    bottom: 5,
-    backgroundColor: 'white',
-  },
-});
