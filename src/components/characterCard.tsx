@@ -9,9 +9,7 @@ const CharacterCard = ({
   imageUrl,
   origin,
   location,
-  episode,
-}: any) => { 
-  ``
+}: any) => {
   const [dimension, getDimension] = useState('');
   const [noOfResidents, getNoOfResidents] = useState(0);
   //Get details from the location endpoint, such as the dimension, and the no of residents in that dimension
@@ -47,10 +45,6 @@ const CharacterCard = ({
         <Text style={ComponentStyle.contentText}>
           Residents: {noOfResidents}
         </Text>
-        <SubHeader title={'Chapters'} />
-        <View>
-          <Text>{episode}</Text>
-        </View>
       </View>
     </View>
   );
