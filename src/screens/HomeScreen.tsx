@@ -44,7 +44,6 @@ const HomeScreen = ({navigation, route}: RootStackParamList<'Home'>) => {
       imageUrl={item.image}
       origin={item.origin}
       location={item.location}
-      episode={item.episode}
     />
   );
 

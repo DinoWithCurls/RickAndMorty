@@ -13,6 +13,7 @@ const CharacterCard = ({
   const [dimension, getDimension] = useState('');
   const [noOfResidents, getNoOfResidents] = useState(0);
   //Get details from the location endpoint, such as the dimension, and the no of residents in that dimension
+  //Get the episodes value from the HomeScreen, and show a episodes dropdown. If you learn how to do it, in the future.
   const getLocationDetails = loc => {
     fetch(loc.url)
       .then(res => res.json())
